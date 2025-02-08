@@ -6,6 +6,20 @@
 </head>
 <body>
     <h1>Lista de Productos</h1>
+    <!-- Botón de agregar producto -->
+    <a th:href="@{/nuevo}" class="btn btn-primary">Agregar Producto</a>
+    
+    <!-- Formulario para búsqueda -->
+    <form th:action="@{/productos}" method="get" style="margin-bottom: 20px;">
+        <label for="nombre">Buscar por nombre:</label>
+        <input type="text" id="name" name="name" th:value="${nombreBuscado}" placeholder="Escribe un nombre">
+        <button type="submit">Buscar</button>
+        <a th:href="@{/productos}" style="margin-left: 10px;">Limpiar búsqueda</a>
+    </form>
+    <!-- Mostrar mensaje si no hay productos -->
+    <div th:if="${#lists.isEmpty(datos)}" style="color: red;">
+        <p>No se encontraron productos con ese nombre.</p>
+    </div>
     
     <!-- Tabla para mostrar los productos -->
     <table class="table table-striped">
@@ -17,6 +31,7 @@
                 <th>Stock</th>
                 <th>Precio</th>
                 <th>Imagen</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +44,11 @@
                 <td th:text="${producto.price}"></td>
                 <td>
                     <img th:src="${producto.image}" alt="Imagen del producto" style="max-width: 100px;">
+                </td>
+                <td>
+                    <a th:href="@{/{id}(id=${producto.id})}">Ver Detalle</a>
+                    <a th:href="@{/editar/{id}(id=${producto.id})}">Editar</a>
+                    <a th:href="@{/eliminar/{id}(id=${producto.id})}">Borrar</a>
                 </td>
             </tr>
         </tbody>
