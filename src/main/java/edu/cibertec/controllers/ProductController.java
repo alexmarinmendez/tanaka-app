@@ -37,6 +37,9 @@ public class ProductController {
 	@GetMapping("/nuevo")
 	public String showForm(Model model) {
 		model.addAttribute("producto", new Product()); // Objeto vacío para el formulario
+		model.addAttribute("titulo", "Registrar Producto");
+        model.addAttribute("action", "/guardar");
+        model.addAttribute("textoBoton", "Guardar");
 		return "formulario-nuevo";
 	}
 	
@@ -46,4 +49,14 @@ public class ProductController {
         return "redirect:/"; // Redirige a la lista de productos
 	}
 	
+    // Mostrar el formulario de eliminación
+    @GetMapping("/eliminar/{id}")
+    public String showFormToDelete(@PathVariable Long id, Model model) {
+    	Optional<Product> product = productService.findById(id);
+        model.addAttribute("producto", product.get());
+		model.addAttribute("titulo", "Eliminar Producto");
+        model.addAttribute("action", "/borrar");
+        model.addAttribute("textoBoton", "Borrar");
+        return "formulario-nuevo";
+    }
 }
