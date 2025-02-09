@@ -65,4 +65,15 @@ public class ProductController {
     	productService.delete(id);
         return "redirect:/"; // Redirige a la lista de productos
     }
+    
+    // Mostrar el formulario de editar
+    @GetMapping("/editar/{id}")
+    public String showFormToUpdate(@PathVariable Long id, Model model) {
+    	Optional<Product> product = productService.findById(id);
+        model.addAttribute("producto", product.get());
+		model.addAttribute("titulo", "Actualizar Producto");
+        model.addAttribute("action", "/actualizar");
+        model.addAttribute("textoBoton", "Actualizar");
+        return "formulario-nuevo";
+    }
 }
