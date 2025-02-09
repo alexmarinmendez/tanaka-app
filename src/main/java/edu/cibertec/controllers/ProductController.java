@@ -29,9 +29,14 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public String findById(@PathVariable Long id, Model model) {
 		Optional<Product> product = productService.findById(id);
-		System.out.println("========>>>>>>>> " + product);
 		model.addAttribute("producto", product.get());
 		return "detalle-producto";
+	}
+	
+	@GetMapping("/nuevo")
+	public String saveProduct(Model model) {
+		model.addAttribute("producto", new Product()); // Objeto vacío para el formulario
+		return "formulario-nuevo";
 	}
 	
 }
