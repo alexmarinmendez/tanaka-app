@@ -59,4 +59,10 @@ public class ProductController {
         model.addAttribute("textoBoton", "Borrar");
         return "formulario-nuevo";
     }
+    
+    @PostMapping("/borrar")
+    public String delete(@RequestParam Long id) {
+    	productService.delete(id);
+        return "redirect:/"; // Redirige a la lista de productos
+    }
 }
