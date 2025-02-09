@@ -1,7 +1,6 @@
 package edu.cibertec.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +17,9 @@ public class ProductController {
 
 	private final ProductService productService;
 	
-	@GetMapping("/productos")
+	@GetMapping("/")
 	public String findAllOrFilterByName(@RequestParam(required = false) String name, Model model) {
 		List<Product> products = productService.findAllOrFilterByName(name);
-		System.out.println(products);
 		model.addAttribute("datos", products);
 		return "productos";
 	}

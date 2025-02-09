@@ -10,17 +10,17 @@
     <a th:href="@{/nuevo}" class="btn btn-primary">Agregar Producto</a>
     
     <!-- Formulario para búsqueda -->
-    <form th:action="@{/productos}" method="get" style="margin-bottom: 20px;">
+    <form th:action="@{/}" method="get" style="margin-bottom: 20px;">
         <label for="nombre">Buscar por nombre:</label>
         <input type="text" id="name" name="name" th:value="${nombreBuscado}" placeholder="Escribe un nombre">
         <button type="submit">Buscar</button>
-        <a th:href="@{/productos}" style="margin-left: 10px;">Limpiar búsqueda</a>
+        <a th:href="@{/}" style="margin-left: 10px;">Limpiar búsqueda</a>
     </form>
     <!-- Mostrar mensaje si no hay productos -->
     <div th:if="${#lists.isEmpty(datos)}" style="color: red;">
         <p>No se encontraron productos con ese nombre.</p>
     </div>
-    
+    <div th:unless="${#lists.isEmpty(datos)}">
     <!-- Tabla para mostrar los productos -->
     <table class="table table-striped">
         <thead>
@@ -53,6 +53,6 @@
             </tr>
         </tbody>
     </table>
-
+	</div>
 </body>
 </html>
