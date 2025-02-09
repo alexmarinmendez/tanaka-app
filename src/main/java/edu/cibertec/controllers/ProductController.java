@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.cibertec.entities.Product;
@@ -34,9 +35,15 @@ public class ProductController {
 	}
 	
 	@GetMapping("/nuevo")
-	public String saveProduct(Model model) {
+	public String showForm(Model model) {
 		model.addAttribute("producto", new Product()); // Objeto vacío para el formulario
 		return "formulario-nuevo";
+	}
+	
+	@PostMapping("/guardar")
+	public String saveProduct(Product product) {
+		productService.save(product);
+        return "redirect:/"; // Redirige a la lista de productos
 	}
 	
 }
