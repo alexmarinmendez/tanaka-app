@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product udpate(Long id, Product product) {
+	public Product update(Long id, Product product) {
 		Optional<Product> oProduct = productRepository.findById(id);
 		if (oProduct.isPresent()) {
 			Product productToUpdate = oProduct.get();

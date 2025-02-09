@@ -76,4 +76,10 @@ public class ProductController {
         model.addAttribute("textoBoton", "Actualizar");
         return "formulario-nuevo";
     }
+    
+    @PostMapping("/actualizar")
+    public String update(@RequestParam Long id, Product product) {
+    	productService.update(id, product);
+        return "redirect:/"; // Redirige a la lista de productos
+    }
 }
